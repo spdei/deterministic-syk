@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the paper below."
+title: "Deterministic hypergraph SYK: code and data"
+authors:
+  - family-names: Prakash
+    given-names: Shiroman
+    affiliation: "Dayalbagh Educational Institute, Agra, India"
+license: MIT
+
+repository-code: "https://github.com/spdei/deterministic-syk
+version: "1.0.0"
+date-released: "2026-09-28"
+preferred-citation:
+  type: article
+  title: "Deterministic Hypergraph SYK: Melonic Dominance and Maximal Chaos Without Disorder Averaging"
+  authors:
+    - family-names: Prakash
+      given-names: Shiroman
+  identifiers:
+    - type: other
+      value: "arXiv:2609.19255"
+  year: 2026

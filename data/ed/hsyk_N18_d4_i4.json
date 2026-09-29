@@ -1,0 +1,142 @@
+{
+  "N": 18,
+  "q": 4,
+  "d": 4,
+  "hyperedges": [
+    [
+      0,
+      8,
+      9,
+      14
+    ],
+    [
+      0,
+      7,
+      12,
+      16
+    ],
+    [
+      0,
+      3,
+      4,
+      11
+    ],
+    [
+      0,
+      1,
+      6,
+      17
+    ],
+    [
+      1,
+      2,
+      5,
+      16
+    ],
+    [
+      1,
+      9,
+      10,
+      12
+    ],
+    [
+      1,
+      8,
+      11,
+      15
+    ],
+    [
+      2,
+      3,
+      8,
+      13
+    ],
+    [
+      5,
+      8,
+      12,
+      17
+    ],
+    [
+      2,
+      4,
+      6,
+      12
+    ],
+    [
+      2,
+      10,
+      11,
+      14
+    ],
+    [
+      6,
+      11,
+      13,
+      16
+    ],
+    [
+      6,
+      7,
+      14,
+      15
+    ],
+    [
+      4,
+      13,
+      14,
+      17
+    ],
+    [
+      4,
+      5,
+      10,
+      15
+    ],
+    [
+      5,
+      7,
+      9,
+      13
+    ],
+    [
+      3,
+      7,
+      10,
+      17
+    ],
+    [
+      3,
+      9,
+      15,
+      16
+    ]
+  ],
+  "couplings": "J_e = J/sqrt(d), J = 1, all positive",
+  "selection_settings": {
+    "seed": 42,
+    "pool_size": 8,
+    "max_candidate_calls": 160,
+    "filter_chiral": true
+  },
+  "diagnostics": {
+    "num_hyperedges": 18,
+    "triangles": 260,
+    "kappa_1": 0.17607299878957403,
+    "kappa_max": 0.3189135350839137,
+    "kappa_min": -0.3189135350839137,
+    "rank_F2": 17,
+    "monomial_chiral_symmetry": "odd",
+    "site_graph_connected": true,
+    "site_graph_diameter": 2
+  },
+  "search_statistics": {
+    "attempts": 31,
+    "valid": 8,
+    "valid_rate": 0.25806451612903225,
+    "kappa1_pool_mean": 0.21594831643318574,
+    "kappa1_pool_std": 0.020466293437734324,
+    "kappa1_best": 0.17607299878957403,
+    "seed": 3752542993
+  }
+}

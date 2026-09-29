@@ -1,0 +1,60 @@
+{
+  "N24_d6": {
+    "main": {
+      "fit_window": [
+        1.5,
+        3.5
+      ],
+      "modes_with_sign_change": 0,
+      "offdiag_fraction_in_window": 0.015796923713074205,
+      "slope_all_modes": -1.4184141969123372,
+      "offset_all_modes_mean": -0.021230186672826234,
+      "slope_kappa_nonpos": -1.2137968614995516,
+      "slope_observed": -1.6113420064962773,
+      "slope_conformal": -1.8849555921538745,
+      "offset_mean": 0.02607766273853047,
+      "rate_kappa_nonpos_mean": 0.8140756072724232,
+      "rate_kappa_nonpos_std": 0.08112619398054187,
+      "rate_kappa_nonpos_disconnected": 0.6283185307179586,
+      "rate_kappa_nonpos_conformal_mean": 0.8716964473386007
+    },
+    "robustness": [
+      {
+        "fit_window": [
+          1.0,
+          3.0
+        ],
+        "modes_with_sign_change": 0,
+        "offdiag_fraction_in_window": 0.009198679207620625,
+        "slope_all_modes": -1.159460790598411,
+        "offset_all_modes_mean": -0.13152440616224145,
+        "slope_kappa_nonpos": -0.9889725061512974,
+        "slope_observed": -1.3448963533037428,
+        "slope_conformal": -1.8849555921538745,
+        "offset_mean": -0.0544473158070754,
+        "rate_kappa_nonpos_mean": 0.6808819716723854,
+        "rate_kappa_nonpos_std": 0.0659717591086937,
+        "rate_kappa_nonpos_disconnected": 0.6283185307179586,
+        "rate_kappa_nonpos_conformal_mean": 0.8716964473386007
+      },
+      {
+        "fit_window": [
+          2.0,
+          4.0
+        ],
+        "modes_with_sign_change": 0,
+        "offdiag_fraction_in_window": 0.029125134565234568,
+        "slope_all_modes": -1.5910606202810798,
+        "offset_all_modes_mean": 0.04675922652023985,
+        "slope_kappa_nonpos": -1.3733832532800019,
+        "slope_observed": -1.7657207540871251,
+        "slope_conformal": -1.8849555921538745,
+        "offset_mean": 0.07434320267677821,
+        "rate_kappa_nonpos_mean": 0.8972372306615033,
+        "rate_kappa_nonpos_std": 0.09217684307241773,
+        "rate_kappa_nonpos_disconnected": 0.6283185307179586,
+        "rate_kappa_nonpos_conformal_mean": 0.8716964473386007
+      }
+    ]
+  }
+}
