@@ -4,7 +4,7 @@ hsyk_constructability.py
 ========================
 Large-N constructability study for "Deterministic Hypergraph SYK" (S. Prakash,
 arXiv:2609.19255). No exact diagonalization: only the hypergraph is built and
-Axioms 1-3 (and the finite-size symmetry filters) are tested.
+Conditions 1-3 (and the finite-size symmetry filters) are tested.
 
 What is computed, per (N, d) and instance
 -----------------------------------------
@@ -19,16 +19,16 @@ Generation   q-uniform, d-regular, LINEAR hypergraph. Configuration model
              switches between uniformly random slots, accepted iff the result is
              still linear: the proposal is symmetric, so the uniform distribution
              on linear hypergraphs with these degrees is stationary.
-Axiom 1      Verified independently (vectorized): no repeated vertex in a
+Condition 1  Verified independently (vectorized): no repeated vertex in a
              hyperedge, no vertex pair in two hyperedges, all degrees equal d.
-Axiom 3      kappa_1 = largest non-uniform eigenvalue of K = A/(d(q-1)), A the
+Condition 3  kappa_1 = largest non-uniform eigenvalue of K = A/(d(q-1)), A the
              site adjacency, by Lanczos on K restricted to the complement of the
              uniform vector; kappa_min = smallest eigenvalue. Reference values:
                kappa_Ram^+ = (q-2 + 2 sqrt((d-1)(q-1)))/(d(q-1))   (Alon-Boppana /
                                                                     Ramanujan edge)
                kappa_Ram^- = (q-2 - 2 sqrt((d-1)(q-1)))/(d(q-1)),  and the exact
                lower bound -1/(q-1) (the paper's lower spectral bound).
-Axiom 2      Cycle rank (first Betti number) of radius-R balls of the Levi graph
+Condition 2  Cycle rank (first Betti number) of radius-R balls of the Levi graph
              around randomly sampled hyperedges, R = 1, 2, ..., as long as the
              ball of a tree would stay below BALL_MAX_FRACTION of the Levi graph.
              Hyperedge-rooted balls suffice: a site ball B(v, R) is a connected
@@ -88,7 +88,7 @@ N_INSTANCES = 3
 SEED = 2026
 
 MIX_SWEEPS = 1.0            # mixing attempts = MIX_SWEEPS * (number of slots)/2; 0 to skip
-N_BALL_ROOTS = 300          # hyperedges sampled as ball centres (Axiom 2)
+N_BALL_ROOTS = 300          # hyperedges sampled as ball centres (Condition 2)
 R_MAX = 10                  # largest Levi radius considered
 BALL_MAX_FRACTION = 0.05    # skip radii whose tree ball exceeds this fraction of the Levi graph
 F2_MAX_N = 3000             # F2 filters only up to this N
@@ -135,7 +135,7 @@ def violating_edges(E, N):
 
 
 def is_linear_regular(E, N, d):
-    """Axiom 1 (plus d-regularity), checked independently of the generator."""
+    """Condition 1 (plus d-regularity), checked independently of the generator."""
     return (violating_edges(E, N).size == 0
             and np.array_equal(np.bincount(E.ravel(), minlength=N), np.full(N, d)))
 
@@ -264,7 +264,7 @@ def incidence_array(E, N, d):
 
 
 # =====================================================================
-# 2. AXIOM 3: spectrum of the site-adjacency operator K
+# 2. CONDITION 3: spectrum of the site-adjacency operator K
 # =====================================================================
 
 def site_adjacency(E, N):
@@ -327,7 +327,7 @@ def kappa_extremes(A, d, q, tol=EIG_TOL, seed=0, m_max=6000, check_every=100):
 
 
 # =====================================================================
-# 3. AXIOM 2: cycle rank of Levi-graph balls around hyperedges
+# 3. CONDITION 2: cycle rank of Levi-graph balls around hyperedges
 # =====================================================================
 
 def tree_ball_sizes(d, q, R_max):

@@ -18,11 +18,13 @@ Produced by `hsyk_numerics.py` (full, postprocess, otoc_reanalysis), `dense_swee
 | `otoc_reanalysis.json` | otoc_reanalysis | fit results for the three fit windows |
 | `postprocess_instances.csv`, `postprocess_summary.json` | postprocess | SD convergence, sector symmetries, z-scores, ⟨r⟩ on E > 0 |
 | `rmt_calibration.csv` | postprocess | finite-size RMT ⟨r⟩ (200 matrices per N) |
+| `rmt_calibration_mirror.csv`, `rmt_combined_test.json` | tools/rmt_mirror_reference.py | finite-size ⟨r⟩ for N = 18, 22 from random matrices with the E → −E symmetry of those sectors at d = q (classes C and D, 400 matrices), and the z-values and Σz² of the combined level-statistics test |
 | `controls_thermo_N24.npz`, `dense_thermo_N24.tex` | postprocess | dense-SYK E/N, S/N |
 | `dense_sweep.json` | dense_sweep.py | dense SYK at N = 18, 20, 22 |
 | `fig_two_point_spectral_N24.pdf`, `fig_thermodynamics_N24.pdf`, `fig_otoc_modes_N24_d6.pdf`, `fig_deltaG_vs_N.pdf` | full / otoc_reanalysis / make_fig | paper figures |
 | `wmin.csv` | hsyk_supplement.py wmin | dim ker_F₂(I) and w_min for every instance |
 | `controls_sparse_N24.json`, `controls_sparse_N24.npz`, `table_controls_sparse.tex` | hsyk_supplement.py sparse_controls | non-linear sparse controls: hypergraphs, ΔG, ⟨r⟩, E/N, S/N, κ₁, overlap counts; G(τ) |
+| `controls_sparse_extras_N24.csv` | hsyk_supplement.py sparse_extras | one row per non-linear control hypergraph: dim ker_F₂(I), w_min, CNOT per Trotter step (original labeling), ΔG(β/2) for uniform and binary couplings and their difference |
 | `resources.json`, `table_simulation.tex` | hsyk_supplement.py resources | quantum-simulation resources: Pauli weights, CNOT counts, optimized labelings, layers, dense comparison |
 
 ## Where each paper table and figure comes from
@@ -33,7 +35,8 @@ Tables are named by the bold title of their caption.
 |---|---|
 | Hypergraph diagnostics | `table_hypergraph_diagnostics.tex`; κ₁ ranges from `instances.csv` |
 | Midpoint deviation from the melonic solution | `table_two_point_deviation.tex` and `instances.csv` (hSYK); `dense_sweep.json` and `controls_N24.npz` (dense SYK) |
-| Single-instance level-spacing ratios | `table_level_statistics.tex`, `postprocess_instances.csv` (z-scores), `rmt_calibration.csv` |
+| Single-instance level-spacing ratios | `table_level_statistics.tex`, `postprocess_instances.csv` (z-scores), `rmt_calibration.csv`; for N = 18, 22 the reference and z-values are from `rmt_calibration_mirror.csv` and `rmt_combined_test.json` |
+| Combined level-statistics test (ED appendix) | `rmt_combined_test.json` |
 | Search statistics for instance 0 | `table_search_statistics.tex` |
 | hSYK and controls at N = 24 | `table_controls.tex`, `controls_N24.npz` (hSYK hypergraphs); `table_controls_sparse.tex`, `controls_sparse_N24.json` (non-linear hypergraphs); `wmin.csv` |
 | Energy and entropy per Majorana at β = 5 | `instances.csv`, `summary.json` (hSYK and SD); `dense_thermo_N24.tex` (dense SYK) |
@@ -42,5 +45,6 @@ Tables are named by the bold title of their caption.
 | Thermodynamics figure | `fig_thermodynamics_N24.pdf` |
 | Mode-resolved OTOC figure | `fig_otoc_modes_N24_d6.pdf`; fits in `otoc_reanalysis.json` |
 | Deviation from the melonic solution versus N | `fig_deltaG_vs_N.pdf` |
+| Numbers in the text on the non-linear controls: w_min of each hypergraph and the binary–uniform difference in ΔG (signs paragraph of the controls), CNOT gates per step (comparison with random sparse SYK) | `controls_sparse_extras_N24.csv` |
 
 The large-N tables and figure are in `../constructability/`.

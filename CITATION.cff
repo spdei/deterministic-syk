@@ -7,9 +7,9 @@ authors:
     affiliation: "Dayalbagh Educational Institute, Agra, India"
 license: MIT
 
-repository-code: "https://github.com/spdei/deterministic-syk
+repository-code: "https://github.com/spdei/deterministic-syk"
 version: "1.0.0"
-date-released: "2026-09-28"
+date-released: "2026-09-29"
 preferred-citation:
   type: article
   title: "Deterministic Hypergraph SYK: Melonic Dominance and Maximal Chaos Without Disorder Averaging"

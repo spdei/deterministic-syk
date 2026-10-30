@@ -24,7 +24,13 @@ Modes (python hsyk_supplement.py <mode>):
                     each evaluated with uniform, binary (+-J/sqrt d) and Gaussian
                     couplings. Output: controls_sparse_N{N}.json/.npz,
                     table_controls_sparse.tex. ~30-60 min at N = 24.
-  all               wmin, resources, sparse_controls.
+  sparse_extras     Per-hypergraph quantities of the sparse controls that the paper
+                    quotes in the text: w_min and sign classes (as in wmin) and CNOT
+                    gates per Trotter step for the original labeling (as in
+                    resources), next to dG for uniform and binary couplings. Reads
+                    controls_sparse_N{N}.json; nothing is diagonalized.
+                    Output: controls_sparse_extras_N{N}.csv. Seconds.
+  all               wmin, resources, sparse_controls, sparse_extras.
 
 Seeds: labeling optimization 0, sparse controls 8.
 """
@@ -467,6 +473,46 @@ def run_sparse_controls():
     return out
 
 
+def run_sparse_extras():
+    """w_min, sign classes and CNOT count of every sparse-control hypergraph, from the saved
+    controls_sparse_N{N}.json. Uses min_codeword_weight (as run_wmin) and term_weights with the
+    original labeling (as run_resources), so the numbers are comparable with wmin.csv and
+    resources.json. Each hypergraph is stored once per coupling type; the three copies are
+    checked to be identical."""
+    N = SPARSE_N
+    path = os.path.join(OUT_DIR, f"controls_sparse_N{N}.json")
+    if not os.path.exists(path):
+        print("No", path, "- run  hsyk_supplement.py sparse_controls  first (or copy its outputs).")
+        return []
+    data = json.load(open(path))
+    P = majorana_pauli(N)
+    rows = []
+    for d in SPARSE_DS:
+        uni, bina, gau = (data["controls"][f"{c}_d{d}"] for c in ("uniform", "binary", "gaussian"))
+        for u, b, g in zip(uni, bina, gau):
+            he = u["hyperedges"]
+            if not (b["hyperedges"] == he and g["hyperedges"] == he):
+                raise ValueError(f"d={d} sample {u['sample']}: coupling types use different hypergraphs")
+            k, wmin, nmin = min_codeword_weight(N, he)
+            w = term_weights(he, np.arange(N), P)
+            row = {"N": N, "d": d, "sample": u["sample"], "num_hyperedges": len(he),
+                   "pairs_sharing_two_sites": u["overlap2"], "kappa_1": u["kappa_1"],
+                   "dim_ker_F2": k, "sign_classes_log2": k, "w_min": wmin, "n_min_weight_codewords": nmin,
+                   "w_mean": float(np.mean(w)), "cnot": int(sum(2 * (x - 1) for x in w)),
+                   "dG_uniform": u["dG_mid"], "dG_binary": b["dG_mid"],
+                   "abs_dG_uniform_minus_binary": abs(u["dG_mid"] - b["dG_mid"])}
+            rows.append(row)
+            print(f"  d={d} sample {row['sample']}: w_min = {wmin} (dim ker = {k}), CNOT = {row['cnot']}, "
+                  f"|dG_uniform - dG_binary| = {row['abs_dG_uniform_minus_binary']:.2e}")
+    out_path = os.path.join(OUT_DIR, f"controls_sparse_extras_N{N}.csv")
+    with open(out_path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        w.writeheader()
+        w.writerows(rows)
+    print(f"Wrote {out_path}")
+    return rows
+
+
 # =====================================================================
 # 4. Data check
 # =====================================================================
@@ -488,7 +534,8 @@ def expected_ed_files():
               "rmt_calibration.csv", f"controls_thermo_N{hn.FIG_N}.npz", f"dense_thermo_N{hn.FIG_N}.tex",
               "dense_sweep.json", "fig_deltaG_vs_N.pdf",
               "wmin.csv", "resources.json", "table_simulation.tex",
-              f"controls_sparse_N{SPARSE_N}.json", f"controls_sparse_N{SPARSE_N}.npz", "table_controls_sparse.tex"]
+              f"controls_sparse_N{SPARSE_N}.json", f"controls_sparse_N{SPARSE_N}.npz", "table_controls_sparse.tex",
+              f"controls_sparse_extras_N{SPARSE_N}.csv"]
     return files
 
 
@@ -509,7 +556,7 @@ def run_check_data():
 
 
 if __name__ == "__main__":
-    RUN_MODE = hn.mode_from_argv(RUN_MODE, ("check_data", "wmin", "resources", "sparse_controls", "all", "none"),
+    RUN_MODE = hn.mode_from_argv(RUN_MODE, ("check_data", "wmin", "resources", "sparse_controls", "sparse_extras", "all", "none"),
                                  "hsyk_supplement.py")
     os.makedirs(OUT_DIR, exist_ok=True)
     if RUN_MODE == "check_data":
@@ -520,9 +567,12 @@ if __name__ == "__main__":
         run_resources()
     elif RUN_MODE == "sparse_controls":
         run_sparse_controls()
+    elif RUN_MODE == "sparse_extras":
+        run_sparse_extras()
     elif RUN_MODE == "all":
         run_wmin()
         run_resources()
         run_sparse_controls()
+        run_sparse_extras()
     elif RUN_MODE != "none":
         raise ValueError(f"Unknown RUN_MODE {RUN_MODE!r}")

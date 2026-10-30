@@ -84,6 +84,7 @@ The steps can also be run individually from `code/`:
 | `python3 hsyk_constructability.py` | large-N constructability study: spectral gap, local cycles, symmetry filters, figure | 15 min |
 | `python3 hsyk_supplement.py wmin` | minimum codeword weights and sign classes of every instance | seconds |
 | `python3 hsyk_supplement.py sparse_controls` | controls on non-linear hypergraphs | 30–40 min |
+| `python3 hsyk_supplement.py sparse_extras` | minimum codeword weight, sign classes and CNOT count of each non-linear control hypergraph, from the saved controls | seconds |
 | `python3 hsyk_supplement.py resources` | quantum-simulation resource estimates | 10–20 min |
 | `python3 hsyk_supplement.py check_data` | list of missing output files | seconds |
 
