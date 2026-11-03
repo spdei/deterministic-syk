@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Runs the full reproduction chain from the repository root, logging each step to logs/.
-# Usage:   bash run_all.sh            (everything, ~5-6 h on one core, less on more cores)
-#          bash run_all.sh supplement (only the supplement, ~1 h; needs the ED outputs)
+# Usage:   bash run_all.sh            (everything)
+#          bash run_all.sh supplement (only the supplement, needs the ED outputs)
 # In the background:   mkdir -p logs && nohup bash run_all.sh > logs/run_all.log 2>&1 &
 # Interpreter: python3 by default (stock Debian/Ubuntu have no "python"); override with
 #              PYTHON=/path/to/python bash run_all.sh
